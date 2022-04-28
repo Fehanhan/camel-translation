@@ -2,8 +2,8 @@
 	"name": "camel-translation",
 	"displayName": "驼峰翻译助手",
 	"description": "驼峰翻译助手",
-	"publisher": "张憨憨",
-	"version": "1.0.0",
+	"publisher": "hanhanzhang",
+	"version": "1.0.1",
 	"icon": "images/logo.png",
 	"engines": {
 		"vscode": "^1.66.0"

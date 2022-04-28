@@ -5,18 +5,6 @@ const google = new GoogleTranslator();
 const { translate } = require('bing-translate-api');
 const googleCN = require('google-translate-api-cn');
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const BaiDuKey = workspace.getConfiguration("camelTranslation").BaiDuKey;
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const BaiDuSecret = workspace.getConfiguration("camelTranslation").BaiDuSecret;
-const baiduTranslate = require('baidu-translate')(BaiDuKey, BaiDuSecret);
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const Youdao = require("youdao-fanyi");
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const YouDaoKey = workspace.getConfiguration("camelTranslation").YouDaoKey;
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const YouDaoSecret = workspace.getConfiguration("camelTranslation").YouDaoSecret;
 
 export enum EengineType {
   google = "google",
@@ -36,7 +24,21 @@ const engineType = {
   },
   // eslint-disable-next-line @typescript-eslint/naming-convention
   baidu: async (src: string, { to }: { to: any }) => {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const BaiDuKey = workspace.getConfiguration("camelTranslation").BaiDuKey;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const BaiDuSecret = workspace.getConfiguration("camelTranslation").BaiDuSecret;
+    if (!BaiDuKey) {
+      // eslint-disable-next-line no-throw-literal
+      throw '请先配置百度应用ID';
+    }
+    if (!BaiDuSecret) {
+      // eslint-disable-next-line no-throw-literal
+      throw '请先配置百度应用秘钥';
+    }
+    const baiduTranslate = require('baidu-translate')(BaiDuKey, BaiDuSecret);
     const res = await baiduTranslate(src);
+    console.log(BaiDuKey);
     if (res.error_msg){
       // eslint-disable-next-line no-throw-literal
       throw `请检查配置 ${res.error_msg}`;
@@ -44,6 +46,12 @@ const engineType = {
     return { text: res.trans_result[0].dst };
   },
   youdao: async (src: string, { to }: { to: any }) => {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const Youdao = require("youdao-fanyi");
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const YouDaoKey = workspace.getConfiguration("camelTranslation").YouDaoKey;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const YouDaoSecret = workspace.getConfiguration("camelTranslation").YouDaoSecret;
     if (!YouDaoKey){
       // eslint-disable-next-line no-throw-literal
       throw '请先配置有道应用ID';
