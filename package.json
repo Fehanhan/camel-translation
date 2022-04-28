@@ -2,8 +2,9 @@
 	"name": "camel-translation",
 	"displayName": "驼峰翻译助手",
 	"description": "驼峰翻译助手",
-	"publisher": "hanhanzhang01",
-	"version": "0.0.5",
+	"publisher": "张憨憨",
+	"version": "1.0.0",
+	"icon": "images/logo.png",
 	"engines": {
 		"vscode": "^1.66.0"
 	},
@@ -182,5 +183,10 @@
 		"change-case": "^4.1.2",
 		"google-translate-api-cn": "^1.0.2",
 		"youdao-fanyi": "^2.0.0"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Stronger161718/camel-translation"
+	},
+	"homepage": "https://github.com/Stronger161718/camel-translation/blob/master/README.md"
 }
